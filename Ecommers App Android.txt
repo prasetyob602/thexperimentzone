@@ -1,0 +1,107 @@
+package com.example.ecommerceapp
+
+import android.os.Bundle
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+
+class MainActivity : ComponentActivity() {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContent {
+            EcommerceApp()
+        }
+    }
+}
+
+@Composable
+fun EcommerceApp() {
+    var cart by remember { mutableStateOf(listOf<String>()) }
+    val products = listOf("Produk A - Rp100.000", "Produk B - Rp150.000", "Produk C - Rp200.000")
+    var isAuthenticated by remember { mutableStateOf(false) }
+    var showPayment by remember { mutableStateOf(false) }
+
+    if (!isAuthenticated) {
+        AuthenticationScreen { isAuthenticated = true }
+    } else {
+        Scaffold(
+            topBar = {
+                TopAppBar(title = { Text("Mini E-Commerce") })
+            }
+        ) { padding ->
+            Column(modifier = Modifier.padding(padding)) {
+                LazyColumn(modifier = Modifier.weight(1f)) {
+                    items(products) { product ->
+                        ProductItem(product, onAddToCart = {
+                            cart = cart + product
+                        })
+                    }
+                }
+                CartSection(cart, onCheckout = { showPayment = true })
+            }
+        }
+    }
+    
+    if (showPayment) {
+        PaymentScreen(onComplete = { showPayment = false; cart = listOf() })
+    }
+}
+
+@Composable
+fun AuthenticationScreen(onLoginSuccess: () -> Unit) {
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+        Text("Silakan login untuk melanjutkan", style = MaterialTheme.typography.h6)
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = onLoginSuccess) {
+            Text("Login")
+        }
+    }
+}
+
+@Composable
+fun ProductItem(name: String, onAddToCart: () -> Unit) {
+    Card(modifier = Modifier.padding(8.dp)) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text(name)
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(onClick = onAddToCart) {
+                Text("Tambahkan ke Keranjang")
+            }
+        }
+    }
+}
+
+@Composable
+fun CartSection(cart: List<String>, onCheckout: () -> Unit) {
+    Card(modifier = Modifier.padding(8.dp)) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Text("Keranjang Belanja", style = MaterialTheme.typography.h6)
+            if (cart.isEmpty()) {
+                Text("Keranjang kosong")
+            } else {
+                cart.forEach { Text(it) }
+                Spacer(modifier = Modifier.height(8.dp))
+                Button(onClick = onCheckout) {
+                    Text("Checkout")
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun PaymentScreen(onComplete: () -> Unit) {
+    Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
+        Text("Masukkan detail pembayaran", style = MaterialTheme.typography.h6)
+        Spacer(modifier = Modifier.height(8.dp))
+        Button(onClick = onComplete) {
+            Text("Bayar Sekarang")
+        }
+    }
+}
