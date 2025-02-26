@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Pribadi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 20px;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+        }
+        section {
+            padding: 50px;
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Selamat Datang di Website Saya</h1>
+        <nav>
+            <a href="#about">Tentang Saya</a>
+            <a href="#portfolio">Portfolio</a>
+            <a href="#contact">Kontak</a>
+        </nav>
+    </header>
+    
+    <section id="about">
+        <h2>Tentang Saya</h2>
+        <p>Halo! Saya [Nama Anda]. Ini adalah website pribadi saya.</p>
+    </section>
+    
+    <section id="portfolio">
+        <h2>Portfolio</h2>
+        <p>Berikut beberapa proyek yang pernah saya buat.</p>
+    </section>
+    
+    <section id="contact">
+        <h2>Kontak</h2>
+        <p>Email: [email@example.com]</p>
+    </section>
+    
+    <footer>
+        &copy; 2025 Website Pribadi
+    </footer>
+</body>
+</html>
