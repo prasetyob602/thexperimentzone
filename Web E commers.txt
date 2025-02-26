@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini E-Commerce</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #333;
+            color: white;
+            padding: 20px;
+        }
+        nav a {
+            margin: 0 15px;
+            color: white;
+            text-decoration: none;
+        }
+        .product {
+            display: inline-block;
+            width: 30%;
+            margin: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        .cart {
+            margin-top: 20px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            background: #333;
+            color: white;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+    <script>
+        let cart = [];
+        function addToCart(product) {
+            cart.push(product);
+            document.getElementById('cartItems').innerText = cart.join(', ');
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Mini E-Commerce</h1>
+        <nav>
+            <a href="#home">Beranda</a>
+            <a href="#products">Produk</a>
+            <a href="#cart">Keranjang</a>
+        </nav>
+    </header>
+    
+    <section id="home">
+        <h2>Selamat Datang di Mini E-Commerce</h2>
+        <p>Temukan produk terbaik dengan harga terbaik!</p>
+    </section>
+    
+    <section id="products">
+        <h2>Produk Kami</h2>
+        <div class="product">
+            <h3>Scarlet</h3>
+            <p>Harga: Rp100.000</p>
+            <button onclick="addToCart('Produk A')">Tambahkan ke Keranjang</button>
+        </div>
+        <div class="product">
+            <h3>Kecap Bango</h3>
+            <p>Harga: Rp150.000</p>
+            <button onclick="addToCart('Produk B')">Tambahkan ke Keranjang</button>
+        </div>
+        <div class="product">
+            <h3>Mie Indomie Goreng</h3>
+            <p>Harga: Rp200.000</p>
+            <button onclick="addToCart('Produk C')">Tambahkan ke Keranjang</button>
+        </div>
+    </section>
+    
+    <section id="cart">
+        <h2>Keranjang Belanja</h2>
+        <p>Produk dalam keranjang: <span id="cartItems">Tidak ada</span></p>
+    </section>
+    
+    <footer>
+        &copy; 2025 Mini E-Commerce
+    </footer>
+</body>
+</html>
